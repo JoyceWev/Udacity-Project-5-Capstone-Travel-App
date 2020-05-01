@@ -1,0 +1,7 @@
+<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8"><title>Test</title><script src="main.js"></script><link href="main.css" rel="stylesheet"></head><body class="bg-gradient-warm"><header><div class=""><h2>News Positivity Measurer</h2></div><div class=""></div></header><main><section><form id="publish-form" onsubmit="return Client.handleSubmit(event)"><input id="name" name="input" value="" placeholder="Name"> <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)"></form><section><section><strong>Form Results:</strong><div id="results"><div id="url"></div><div id="text"></div><div id="polarity"></div><div id="subjectivity"></div><div id="polarity_confidence"></div><div id="subjectivity_confidence"></div></div></section></section></section></main><footer></footer><script>// Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }</script><script src="main.js"></script></body></html>

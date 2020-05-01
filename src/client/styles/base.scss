@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@900&display=swap');
+
+// _base.scss
+$font-stack: 'Roboto', sans-serif;
+$font-header: 'Work Sans', sans-serif;
+$primary-color: #333;
+$primary-background: #FFF;
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: $font-stack;
+    color: $primary-color;
+}
+
+h2{
+    font-family: $font-header;
+    font-weight: bold;
+    font-size: 30px;
+    padding:8px;
+}
+
+main {
+ 	display: flex;
+    flex: 2;
+    align-items:center;
+}
+
+section {
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+//
+// Gradient system
+//
+$gradients: () !default;
+$gradients: map-merge((
+    chill: linear-gradient(135deg, #09e485 0%,#0291e3 100%),
+    warm: linear-gradient(135deg, #F2CD48 0%,#FD803F 100%),
+    hot: linear-gradient(135deg, #F9445A 0%,#FD803F 100%),
+    cold: linear-gradient(135deg, #8019C6 0%,#2F93CC 100%)
+), $gradients);
+
+// Gradient backgrounds
+@mixin bg-gradient($parent, $gradient) {
+  #{$parent} {
+    background: $gradient;
+  }
+}
+
+// Gradient Classes 
+@each $gradient, $value in $gradients {
+  @include bg-gradient(".bg-gradient-#{$gradient}", $value);
+}
