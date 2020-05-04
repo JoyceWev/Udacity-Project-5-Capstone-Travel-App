@@ -3,20 +3,27 @@ dotenv.config()
 
 var path = require('path')
 const express = require('express')
-const mockAPIResponse = require('./mockAPI.js')
-const cors = require('cors')
-const app = express()
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(cors())
 
-var AYLIENTextAPI = require('aylien_textapi');
-var textapi = new AYLIENTextAPI({
-  application_id: process.env.API_ID,
-  application_key: process.env.API_KEY
-});
 // Setup empty JS object to act as endpoint for all routes
+const projectData = [];
+
+/* Dependecies*/
+// Require Bodyparser to run server and routes
+const bodyParser = require('body-parser');
+// Require Express to run server and routes
+
+// Start up an instance of app
+const app = express();
+
+/* Middleware*/
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Cors for cross origin allowance
+const cors = require('cors');
+app.use(cors());
+// Initialize the main project folder
 
 app.use(express.static('dist'))
 
@@ -26,29 +33,47 @@ app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })
 
-// designates what port the app will listen to for incoming requests
+// Setup Server
 const port = 8080;
-app.listen(port, function () {
-    console.log('Example app listening on port '+port)
-})
+const server = app.listen(port,listening);
+
+function listening() {
+	//console.log(server);
+	console.log("server is running i guess");
+    console.log("oh and btw, the port is " + port);
+}
+
+app.get('/all', sendData);
 
 // POST method route
- app.post('/sentiment', sendData);
- function sendData (req, res) {
- 	console.log(req);
- 	const url = req.body.URL
- 	console.log(url);
- 	textapi.sentiment({
-		url: url,
-		mode: 'document' 
-	},
-	function(error, response) {
-		if (error) {
-			console.log(error)
-		} else{
-			res.send(response)
-		}
-	})
- };
 
+function sendData (req, res) {
+	res.send(projectData);
+};
 
+function receivedPost (req, res) {
+	console.log(res);
+	res.send('POST received')
+};
+
+app.post('/addCity', addWeather);
+
+function addWeather (req, res) {
+	console.log(req);
+	let newEntry = {
+		city: req.body.city,
+		temp: req.body.temp,
+		lat: req.body.lat,
+		long: req.body.long,
+		plans: req.body.plans,
+		traveldate: req.body.traveldate,
+		max_temp: req.body.max_temp,
+        min_temp: req.body.min_temp,
+        rain: req.body.rain,
+        weather_description: req.body.weather_description,
+        weather_code: req.body.weather_code
+	}
+	projectData.unshift(newEntry);
+	console.log(newEntry);
+	res.send(projectData);
+}
