@@ -1,85 +1,98 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Weather Journal</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
-</head>
- <body>
-  <div class = "hero">  
-    <div class ="headline">
-      <div>
-        <h1>Let's get lost</h1>
-        <p>But first, tell me where</p>
-        <p>you wanna go</p>
+  <head>
+    <meta charset="UTF-8">
+    <title>Weather Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class = "hero">  
+      <div class ="headline">
+        <div>
+          <h1>Let's get lost</h1>
+          <p>But first, tell me where</p>
+          <p>you wanna go</p>
+        </div>
+      </div>
+      <div id = "backgroundimg">
+          <img src="https://images.pexels.com/photos/7919/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260">
       </div>
     </div>
-    <div id = "backgroundimg">
-        <img src="/4f6bdd6f3f5c18b2aba7765e6700fb8a.jpg">
-      </div>
-    </div>
-  <div id = "appHeader">
-      <div class ="holder enterData row">
-        <div>
-          <label for="zip">Zipcode<p></label>
-          <input type="text" id="zip" placeholder="00000">
-        </div>
-        <div>
-          <label for="zip">Country abbreviation</label>
-          <input type="text" id="country" placeholder="USA">
-        </div>
-        <div>
-          <label for="zip">Travel Date</label>
-          <input type="text" id="inputdate" placeholder="DD-MM-YYYY">
-        </div>
-        <div></div>
-        <button id="generate" type = "submit"> > </button>
-      </div>
-    <div class ="holder feel">
-      <label for="feelings">What did you do today?</label>
-      <textarea class= "myInput" id="feelings" placeholder="Enter your adventures here"></textarea>
-    </div>
-    <div class ="holder entry">
-      <div class = "title">Your Planned Adventures</div>
-      <div id = "entryHolder">
-        <div id = "entryHolderLeft">
-          <div id = "cityImage">
-            <img src="/4f6bdd6f3f5c18b2aba7765e6700fb8a.jpg">
-          </div>
-          <div id = "informationHolder">
-            <div id="temperature">
-              <div id = "temp">18</div>
-              <div id = 'degrees'>°C</div>
-            <div id =aligntemp>
-              <div id="mintemperature">
-                <div id = "min_temp">5 °C</div>
-                <div>min.</div>
-              </div>
-              <div>-</div>
-              <div id="maxtemperature">
-                <div id = "max_temp">12 °C</div>
-                <div>max.</div>
-              </div>
-            </div>
-            </div>
-            <div id="rainprec">
-              <div id = "rain">1.2</div>
-              <div>mm/h</div> 
-              <div id = "icon"></div> 
-              <div id = "weather_description">Thunderstorm with heavy drizzle</div> 
-          </div>
-          </div>
-        </div>
-        <div id = "entryHolderRight">
+    <div id = "appHeader">
+        <div class ="holder enterData row">
           <div>
-            <div id = "date">10-06-2020</div>
-            <div id = "city">Amsterdam</div> 
+            <label for="zip">Zipcode<p></label>
+            <input type="text" id="zip" placeholder="00000">
           </div>
-          <div id = "content">"I will sit inside and do nothing cause i'm in quarantaine."</div>
+          <div>
+            <label for="zip">Country</label>
+            <input type="text" id="country" placeholder="USA">
+          </div>
+          <div>
+            <label for="zip">Travel Date</label>
+            <input type="text" id="inputdate" placeholder="DD-MM-YYYY">
+          </div>
+          <div id ="spacefiller"></div>
+          <button id="generate" type = "submit"> > </button>
+        </div>
+      <div class ="holder entry">
+        <div class = "title">Your Planned Adventures</div>
+        <div id = "entryHolder">
+          <div id = "entryHolderLeft">
+            <div id = "cityImage">
+              <img id="placeImageHolder" src="/09724a3b9e0fdea29d1104c785fc2767.jpg">
+            </div>
+            <div id = "informationHolder">
+              <div id = "iconHolder">
+                  <img id="icon" src="/3a4650e6255fd139b921926988c91da2.png">
+              </div> 
+              <div id="temperature">
+                <div id = "temp"></div>
+                <div id = 'degrees'></div>
+                <div id =aligntemp>
+                  <div id="mintemperature">
+                    <div id = "min_temp"></div>
+                    <div>min.</div>
+                  </div>
+                  <div>-</div>
+                  <div id="maxtemperature">
+                    <div id = "max_temp"></div>
+                    <div>max.</div>
+                  </div>
+                </div>
+              </div>
+              <div id="rainprec">
+                <div id = "rain"></div>
+                <div>mm/h</div> 
+                <div id = "weather_description"></div> 
+              </div>
+            </div>
+          </div>
+          <div id = "entryHolderRight">
+            <div>
+              <div id = "date">10-06-2020</div>
+              <div id = "city">Amsterdam</div> 
+            </div>
+            <div class ="holder feel" id="travelplans">
+              <label for="feelings">What do you want to do?</label>
+              <textarea class= "myInput" id="feelings" placeholder="Enter your adventures here"></textarea>
+              <div id="buttonHolder">
+                <button id="add" type = "submit"> > </button>
+              </div>
+            </div>
+            <div id = "content"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <script src="main.js" type="text/javascript"></script>
-</body>
+   <script>
+      // Check that service workers are supported
+      if ('serviceWorker' in navigator) {
+          // Use the window load event to keep the page load performant
+          window.addEventListener('load', () => {
+              navigator.serviceWorker.register('/service-worker.js');
+          });
+      }
+   </script>
+  </body>
 </html>

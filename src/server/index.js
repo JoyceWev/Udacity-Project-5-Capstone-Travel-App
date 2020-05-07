@@ -6,6 +6,7 @@ const express = require('express')
 
 // Setup empty JS object to act as endpoint for all routes
 const projectData = [];
+const totalData = [];
 
 /* Dependecies*/
 // Require Bodyparser to run server and routes
@@ -56,24 +57,55 @@ function receivedPost (req, res) {
 	res.send('POST received')
 };
 
-app.post('/addCity', addWeather);
+app.post('/addCity', addCity);
 
-function addWeather (req, res) {
-	console.log(req);
+function addCity (req, res) {
+	console.log("req received addCity");
 	let newEntry = {
 		city: req.body.city,
-		temp: req.body.temp,
 		lat: req.body.lat,
 		long: req.body.long,
 		plans: req.body.plans,
 		traveldate: req.body.traveldate,
-		max_temp: req.body.max_temp,
-        min_temp: req.body.min_temp,
-        rain: req.body.rain,
-        weather_description: req.body.weather_description,
-        weather_code: req.body.weather_code
+		weather: {
+			temp: req.body.temp,
+			max_temp: req.body.max_temp,
+	        min_temp: req.body.min_temp,
+	        rain: req.body.rain,
+	        weather_description: req.body.weather_description,
+	        weather_code: req.body.weather_code,
+		},
+        placePicture: req.body.placePicture
 	}
-	projectData.unshift(newEntry);
-	console.log(newEntry);
+	let lnth = projectData.length
+	projectData.splice(0, lnth, newEntry);
+	console.log("projectdata is" + projectData);
 	res.send(projectData);
 }
+
+app.post('/addPlan', addTotal);
+
+function addTotal (req, res) {
+	console.log("req received addtotal");
+	let newEntry = {
+		city: req.body.city,
+		lat: req.body.lat,
+		long: req.body.long,
+		plans: req.body.plans,
+		traveldate: req.body.traveldate,
+		weather: {
+			temp: req.body.temp,
+			max_temp: req.body.max_temp,
+	        min_temp: req.body.min_temp,
+	        rain: req.body.rain,
+	        weather_description: req.body.weather_description,
+	        weather_code: req.body.weather_code,
+		},
+        placePicture: req.body.placePicture
+	}
+	let lnth = projectData.length
+	projectData.splice(0, lnth, newEntry);
+	totalData.unshift(projectData)
+}
+
+module.exports = app;

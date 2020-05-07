@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const json = require('./package.json');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MediaQueryPlugin = require('media-query-plugin');
 //const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
@@ -26,7 +27,7 @@ module.exports = {
 			},
 			{
 	        	test: /\.scss$/,
-	       		use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+	       		use: [ 'style-loader', MediaQueryPlugin.loader, 'css-loader', 'sass-loader' ]
 			},
 			{
 	          test: /\.(png|svg|jpg|gif)$/,
@@ -50,6 +51,14 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
    		}),
+	        new MediaQueryPlugin({
+            include: [
+                'example'
+            ],
+            queries: {
+                'print, screen and (min-width: 75em)': 'desktop'
+            }
+        }),
 	        //new BundleAnalyzerPlugin(),
 	]
 	//output: { ...output options }
